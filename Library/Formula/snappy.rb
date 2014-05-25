@@ -18,6 +18,11 @@ class Snappy < Formula
   depends_on 'pkg-config' => :build
 
   def install
+    ENV.append "CXXFLAGS", '-stdlib=libstdc++'
+    ENV.append "CFLAGS", '-stdlib=libstdc++'
+    ENV.append "LDFLAGS", '-stdlib=libstdc++ -lstdc++'
+    ENV["CXX"] = '/usr/bin/clang++ -stdlib=libstdc++'
+    #The following is necessary because libtool liks to strip LDFLAGS:
     ENV.universal_binary if build.universal?
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
