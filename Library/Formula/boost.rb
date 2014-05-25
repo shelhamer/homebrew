@@ -132,7 +132,7 @@ class Boost < Formula
     # on such systems.
     without_libraries << "log" if ENV.compiler == :gcc || ENV.compiler == :llvm
 
-    without_libraries << "python" if build.without? 'python'
+    #without_libraries << "python" if build.without? 'python'
     without_libraries << "mpi" if build.without? 'mpi'
 
     bargs << "--without-libraries=#{without_libraries.join(',')}"
